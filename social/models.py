@@ -6,7 +6,8 @@ from django.db.models import Q, F
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts")
-    body = models.TextField()
+    content = models.TextField()
+    media_url = models.URLField(max_length=2048, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     class Meta:

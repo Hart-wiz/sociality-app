@@ -12,10 +12,11 @@ Table users_user {
 Table social_post {
   id bigserial [pk]
   author_id bigint [not null, ref: > users_user.id]
-  body text [not null]
+  content text [not null]
+  Media_url text [not null]
   created_at timestamp [not null, default: `now()`]
   updated_at timestamp [not null, default: `now()`]
-  Note: 'Body length must be between 1 and 1000 characters'
+  -- Note: 'Body length must be between 1 and 1000 characters'
 }
 
 Table social_follow {
@@ -28,7 +29,7 @@ Table social_follow {
     follower_id
     following_id
   }
-  Note: 'Follower cannot be the same as Following (no self-follow)'
+  -- Note: 'Follower cannot be the same as Following (no self-follow)'
 }
 
 Table social_comment {
@@ -41,7 +42,7 @@ Table social_comment {
     (post_id, created_at)
     (author_id, created_at)
   }
-  Note: 'Body length must be between 1 and 1000 characters'
+  -- Note: 'Body length must be between 1 and 1000 characters'
 }
 
 Table social_message {
@@ -55,5 +56,5 @@ Table social_message {
     (sender_id, recipient_id, created_at)
     (recipient_id, read_at)
   }
-  Note: 'Direct messages between users; optionally enforce sender follows recipient at app layer'
+  -- Note: 'Direct messages between users; optionally enforce sender follows recipient at app layer'
 }
