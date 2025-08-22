@@ -126,7 +126,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = "users.User"
+
+AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -139,3 +140,13 @@ REST_FRAMEWORK = {
 
 # Basic security defaults for dev
 ALLOWED_HOSTS = ["*"]
+
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # access token valid for 1 hour
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     # refresh token valid for 1 day
+}
+
+

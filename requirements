@@ -1,3 +1,0 @@
-**installations for the project**
-
-pip install django djangorestframework djangorestframework-simplejwt django-filter python-dotenv
