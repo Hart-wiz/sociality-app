@@ -20,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
     author = UserPublicSerializer(read_only=True)
     class Meta:
         model = Post
-        fields = ("id", "author", "body", "created_at", "updated_at")
+        fields = ("id", "author", "content", "created_at", "updated_at")
     def validate_body(self, v):
         if not (1 <= len(v) <= 1000):
             raise serializers.ValidationError("Body must be 1–1000 characters.")

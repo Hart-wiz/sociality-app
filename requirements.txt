@@ -1,0 +1,8 @@
+# **installations for the project**
+
+
+django
+djangorestframework
+djangorestframework-simplejwt
+django-filter
+python-dotenv

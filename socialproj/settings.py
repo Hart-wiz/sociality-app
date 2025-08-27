@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework_simplejwt.token_blacklist",
     "rest_framework",
     "django_filters",
     'users',
-    'social'
+    'social',
+    'notifications'
 ]
 
 MIDDLEWARE = [
@@ -126,7 +128,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = "users.User"
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -139,3 +142,13 @@ REST_FRAMEWORK = {
 
 # Basic security defaults for dev
 ALLOWED_HOSTS = ["*"]
+
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # access token valid for 1 hour
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     # refresh token valid for 1 day
+}
+
+
