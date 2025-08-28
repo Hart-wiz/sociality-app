@@ -1,5 +1,4 @@
 # users/views.py or posts/views.py (depending on app structure)
-
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q
 from rest_framework import generics, permissions, status, viewsets
@@ -10,9 +9,9 @@ from .serializers import PostSerializer, UserPublicSerializer, MeUpdateSerialize
 
 User = get_user_model()
 
-# -----------------------------
+# ----------------------------
 # Custom Permissions
-# -----------------------------
+# ----------------------------
 class IsAuthorOrReadOnly(permissions.BasePermission):
     """
     Allow only the author of a post to edit/delete it.
