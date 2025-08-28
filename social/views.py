@@ -96,11 +96,11 @@ class FollowToggle(generics.GenericAPIView):
         
         # Create follow if it doesn't exist
         Follow.objects.get_or_create(follower=request.user, following=target_user)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "followed"},status=status.HTTP_204_NO_CONTENT)
 
     def delete(self, request, user_id):
         Follow.objects.filter(follower=request.user, following_id=user_id).delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "unfollowed"},status=status.HTTP_204_NO_CONTENT)
 
 
 # -----------------------------

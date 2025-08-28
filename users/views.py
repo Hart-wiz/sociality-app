@@ -26,6 +26,7 @@ class RegisterView(generics.CreateAPIView):
         # Generate JWT token
         refresh = RefreshToken.for_user(user)
         data = {
+            "message": "User registered successfully.",
             "user": UserPublicSerializer(user).data,
             "refresh": str(refresh),
             "access": str(refresh.access_token),
@@ -63,6 +64,7 @@ class LoginView(APIView):
         # Generate JWT tokens
         refresh = RefreshToken.for_user(user)
         data = {
+            "message": "User logged in",
             "user": UserPublicSerializer(user).data,
             "refresh": str(refresh),
             "access": str(refresh.access_token),
@@ -84,7 +86,7 @@ class LogoutView(APIView):
             refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
             token.blacklist()  # requires Simple JWT blacklist app enabled
-            return Response(status=status.HTTP_205_RESET_CONTENT)
+            return Response({"message": "User logged out"},status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -101,3 +103,15 @@ class MeUpdateView(generics.UpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop("partial", False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response({
+            "message": "Profile updated successfully.",
+            "user": serializer.data
+        }, status=status.HTTP_200_OK)
