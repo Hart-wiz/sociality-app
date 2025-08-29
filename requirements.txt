@@ -6,3 +6,8 @@ djangorestframework
 djangorestframework-simplejwt
 django-filter
 python-dotenv
+gunicorn
+whitenoise
+python-decouple
+django-cors-headers
+pillow
